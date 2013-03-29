@@ -96,37 +96,33 @@ CREATE TABLE restaurant_reviews (
   text_review TEXT,
   score INTEGER,
   date_of_review DATE,
-  FOREIGN KEY reviewer_id REFERENCES critics(id),
-  FOREIGN KEY restaurant_id REFERENCES restaurants(id)
+  FOREIGN KEY (reviewer_id) REFERENCES critics(id),
+  FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
 );
 
 INSERT INTO  restaurant_reviews (reviewer_id,restaurant_id, text_review, score, date_of_review)
-     SELECT  critics.id,restaurants.id "I\'d give it four stars if the prices were lower",
-             3, '2012-12-03'
+     SELECT  critics.id,restaurants.id, 'Id give it four stars if the prices were lower', 3, '2012-12-03'
        FROM  critics
  CROSS JOIN  restaurants
       WHERE  critics.screen_name = 'Kara' AND restaurants.name = 'Blue Plate';
 INSERT INTO  restaurant_reviews (reviewer_id,restaurant_id, text_review, score, date_of_review)
-     SELECT  critics.id,restaurants.id "The food was that good and the portions were huge",
+     SELECT  critics.id,restaurants.id, "The food was that good and the portions were huge",
              4, '2013-1-31'
        FROM  critics
  CROSS JOIN  restaurants
       WHERE  critics.screen_name = 'Maddy' AND restaurants.name = 'Café Cole';
 INSERT INTO  restaurant_reviews (reviewer_id,restaurant_id, text_review, score, date_of_review)
-     SELECT  critics.id,restaurants.id "Think fancy comfort food",
-             2, '2013-1-31'
+     SELECT  critics.id,restaurants.id ,'Think fancy comfort food', 2, '2013-1-31'
        FROM  critics
  CROSS JOIN  restaurants
       WHERE  critics.screen_name = 'Adam' AND restaurants.name = 'Boulange de Cole Valley';
 INSERT INTO  restaurant_reviews (reviewer_id,restaurant_id, text_review, score, date_of_review)
-     SELECT  critics.id,restaurants.id "Food Sucks",
-             1, '2013-2-31'
+     SELECT  critics.id,restaurants.id, 'Food Sucks', 1, '2013-2-31'
        FROM  critics
  CROSS JOIN  restaurants
       WHERE  critics.screen_name = 'Maddy' AND restaurants.name = 'Café Cole';
 INSERT INTO  restaurant_reviews (reviewer_id,restaurant_id, text_review, score, date_of_review)
-     SELECT  critics.id,restaurants.id "Food Poisening",
-             0, '2013-3-20'
+     SELECT  critics.id,restaurants.id, 'Food Poisening', 0, '2013-3-20'
        FROM  critics
  CROSS JOIN  restaurants
       WHERE  critics.screen_name = 'Kara' AND restaurants.name = 'Boulange de Cole Valley';
