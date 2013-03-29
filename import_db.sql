@@ -8,22 +8,22 @@ CREATE TABLE chefs (
 
 );
 
-INSERT INTO chefs (fname, lname, mentor_d)
-VALUES(Sidoine, Benoît, NULL);
+INSERT INTO chefs (fname, lname, mentor_id)
+VALUES('Sidoine', 'Benoît', NULL);
 
-INSERT INTO chefs (fname, lname, mentor_d)
+INSERT INTO chefs (fname, lname, mentor_id)
      SELECT "Guillaume", "Tirel", chefs.mentor_id
        FROM chefs
       WHERE chefs.fname = "Sidoine" AND chefs.lname = "Benoît";
-INSERT INTO chefs (fname, lname, mentor_d)
+INSERT INTO chefs (fname, lname, mentor_id)
      SELECT "Martino", "da Como", chefs.mentor_id
        FROM chefs
       WHERE chefs.fname = "Sidoine" AND chefs.lname = "Benoît";
-INSERT INTO chefs (fname, lname, mentor_d)
+INSERT INTO chefs (fname, lname, mentor_id)
      SELECT "Lancelot", "de Lancelot", chefs.mentor_id
        FROM chefs
       WHERE chefs.fname = "Martino" AND chefs.lname = "da Como";
-INSERT INTO chefs (fname, lname, mentor_d)
+INSERT INTO chefs (fname, lname, mentor_id)
      SELECT "Richard", "Leblanc", chefs.mentor_id
        FROM chefs
       WHERE chefs.fname = "Guillaume" AND chefs.lname = "Tirel";
@@ -36,16 +36,19 @@ CREATE TABLE restaurants (
 );
 
 INSERT INTO restaurants (name, neighborhood, cuisine)
-VALUES("Alemany Farmers Market","Bernal Heights","Farmer")
-VALUES("Blue Plate","Bernal Heights","Hipster")
-VALUES("Café Cole", "Cole Valley","Healthy")
-VALUES("Boulange de Cole Valley", "Cole Valley","French");
+     VALUES('Alemany Farmers Market','Bernal Heights','Farmer');
+INSERT INTO restaurants (name, neighborhood, cuisine)
+    VALUES("Blue Plate","Bernal Heights","Hipster");
+INSERT INTO restaurants (name, neighborhood, cuisine)
+     VALUES("Café Cole", "Cole Valley","Healthy");
+INSERT INTO restaurants (name, neighborhood, cuisine)
+     VALUES("Boulange de Cole Valley", "Cole Valley","French");
 
 CREATE TABLE chef_tenures (
   id INTEGER PRIMARY KEY,
-  chef_id INTEGER IS NOT NULL,
-  restaurant_id INTEGER IS NOT NULL,
-  start_date DATE IS NOT NULL,
+  chef_id INTEGER  NOT NULL,
+  restaurant_id INTEGER NOT NULL,
+  start_date DATE  NOT NULL,
   end_date DATE,
   FOREIGN KEY (chef_id) REFERENCES chefs(id),
   FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
@@ -76,16 +79,20 @@ screen_name VARCHAR(255)
 );
 
 INSERT INTO critics (screen_name)
-    VALUES  ('Kara')
-    VALUES  ('Pico')
-    VALUES  ('Shane')
-    VALUES  ('Maddy')
+    VALUES  ('Kara');
+INSERT INTO critics (screen_name)
+    VALUES  ('Pico');
+INSERT INTO critics (screen_name)
+    VALUES  ('Shane');
+INSERT INTO critics (screen_name)
+    VALUES  ('Maddy');
+INSERT INTO critics (screen_name)
     VALUES  ('Adam');
 
-CREATE TABLE restaurant_reviews(
+CREATE TABLE restaurant_reviews (
   id INTEGER PRIMARY KEY,
-  reviewer_id INTEGER,
-  restaurant_id INTEGER,
+  reviewer_id INTEGER NOT NULL,
+  restaurant_id INTEGER NOT NULL,
   text_review TEXT,
   score INTEGER,
   date_of_review DATE,
