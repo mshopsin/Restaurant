@@ -12,19 +12,19 @@ INSERT INTO chefs (fname, lname, mentor_id)
 VALUES('Sidoine', 'Benoît', NULL);
 
 INSERT INTO chefs (fname, lname, mentor_id)
-     SELECT "Guillaume", "Tirel", chefs.mentor_id
+     SELECT "Guillaume", "Tirel", chefs.id
        FROM chefs
       WHERE chefs.fname = "Sidoine" AND chefs.lname = "Benoît";
 INSERT INTO chefs (fname, lname, mentor_id)
-     SELECT "Martino", "da Como", chefs.mentor_id
+     SELECT "Martino", "da Como", chefs.id
        FROM chefs
       WHERE chefs.fname = "Sidoine" AND chefs.lname = "Benoît";
 INSERT INTO chefs (fname, lname, mentor_id)
-     SELECT "Lancelot", "de Lancelot", chefs.mentor_id
+     SELECT "Lancelot", "de Lancelot", chefs.id
        FROM chefs
       WHERE chefs.fname = "Martino" AND chefs.lname = "da Como";
 INSERT INTO chefs (fname, lname, mentor_id)
-     SELECT "Richard", "Leblanc", chefs.mentor_id
+     SELECT "Richard", "Leblanc", chefs.id
        FROM chefs
       WHERE chefs.fname = "Guillaume" AND chefs.lname = "Tirel";
 
@@ -61,13 +61,25 @@ INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date)
        WHERE chefs.fname = 'Guillaume'
          AND restaurants.name = 'Alemany Farmers Market';
 INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date)
+     SELECT chefs.id, restaurants.id, '2011-10-15', '2012-10-13'
+       FROM chefs
+ CROSS JOIN restaurants
+      WHERE chefs.fname = 'Sidoine'
+        AND restaurants.name = 'Alemany Farmers Market';
+INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date)
      SELECT chefs.id, restaurants.id, '2009-12-15', '2011-10-13'
        FROM chefs
  CROSS JOIN restaurants
       WHERE chefs.fname = 'Richard'
         AND restaurants.name = 'Café Cole';
 INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date)
-     SELECT chefs.id, restaurants.id, '2008-12-15', '2012-6-10'
+     SELECT chefs.id, restaurants.id, '2011-09-13', '2012-10-13'
+       FROM chefs
+ CROSS JOIN restaurants
+      WHERE chefs.fname = 'Martino'
+        AND restaurants.name = 'Café Cole';
+INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date)
+     SELECT chefs.id, restaurants.id, '2008-12-15', '2012-06-10'
        FROM chefs
  CROSS JOIN restaurants
       WHERE chefs.fname = 'Martino'
