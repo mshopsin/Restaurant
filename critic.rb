@@ -35,4 +35,17 @@ class Critic
     critic_data.map{ |critic_datum| Critic.new(critic_datum) }
   end
 
+  def unreviewed_restaurants
+    restaurant_data = RestaurantDatabase.execute(<<-SQL, @id)
+             SELECT restaurants.*
+              FROM  restaurants
+   LEFT OUTER JOIN  restaurant_reviews
+                ON (restaurants.id=restaurant_reviews.restaurant_id
+               AND  restaurant_reviews.reviewer_id = ?)
+             WHERE restaurant_reviews.reviewer_id IS NULL;
+    SQL
+
+    restaurant_data.map{ |restaurant_datum| Restaurant.new(restaurant_datum) }
+  end
+
 end

@@ -67,6 +67,12 @@ INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date)
       WHERE chefs.fname = 'Sidoine'
         AND restaurants.name = 'Alemany Farmers Market';
 INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date)
+     SELECT chefs.id, restaurants.id, '2008-12-15', '2012-06-10'
+       FROM chefs
+ CROSS JOIN restaurants
+      WHERE chefs.fname = 'Martino'
+        AND restaurants.name = 'Alemany Farmers Market';
+INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date)
      SELECT chefs.id, restaurants.id, '2009-12-15', '2011-10-13'
        FROM chefs
  CROSS JOIN restaurants
@@ -138,6 +144,11 @@ INSERT INTO  restaurant_reviews (reviewer_id,restaurant_id, text_review, score, 
        FROM  critics
  CROSS JOIN  restaurants
       WHERE  critics.screen_name = 'Kara' AND restaurants.name = 'Boulange de Cole Valley';
+INSERT INTO  restaurant_reviews (reviewer_id,restaurant_id, text_review, score, date_of_review)
+     SELECT  critics.id,restaurants.id, 'Woot', 5, '2010-03-04'
+       FROM  critics
+ CROSS JOIN  restaurants
+      WHERE  critics.screen_name = 'Kara' AND restaurants.name = 'Alemany Farmers Market';
 
 
 

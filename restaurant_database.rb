@@ -5,7 +5,7 @@ class RestaurantDatabase < SQLite3::Database
   include Singleton
 
   def initialize
-    super("restuarant_reviews.db")
+    super("restaurant_reviews.db")
 
     self.results_as_hash = true
     self.type_translation = true
