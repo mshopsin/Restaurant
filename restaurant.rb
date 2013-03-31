@@ -21,6 +21,33 @@ class Restaurant
       end
   end
 
+  def self.top_restaurants(n)
+    restaurant_data = RestaurantDatabase.execute(<<-SQL,n)
+      SELECT  restaurants.*
+        FROM  restaurant_reviews
+        JOIN  restaurants ON (restaurant_reviews.restaurant_id=restaurants.id) 
+    GROUP BY  restaurant_id 
+    ORDER BY  AVG(restaurant_reviews.score) 
+  DESC LIMIT  ?;
+    SQL
+
+    restaurant_data.map { |restaurant_datum| Restaurant.new(restaurant_datum) }
+
+  end
+
+  def self.frequently_reviewed_restaurantsi(min_reviews)
+    restaurant_data = RestaurantDatabase.execute(<<-SQL,min_reviews)
+      SELECT  restaurants.* 
+        FROM  restaurant_reviews 
+        JOIN  restaurants ON (restaurant_reviews.restaurant_id=restaurants.id)  
+    GROUP BY  restaurant_reviews.RESTAURANT_ID 
+      HAVING  count(*) >= ? 
+    SQL
+
+    restaurant_data.map { |restaurant_datum| Restaurant.new(restaurant_datum) }
+
+  end
+
   def reviews
     RestaurantReviewer.reviews(@id)
   end
